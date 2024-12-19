@@ -1,0 +1,61 @@
+# Symlinked partitions
+/system_image		emmc		/dev/block/mapper/system							flags=backup=0;flashimg;display="System Image"
+/vendor_image		emmc		/dev/block/mapper/vendor							flags=backup=0;flashimg;display="Vendor Image"
+/product_image		emmc		/dev/block/mapper/product							flags=backup=0;flashimg;display="Product Image"
+/system_ext_image	emmc            /dev/block/mapper/system_ext							flags=backup=0;flashimg;display="System_ext Image"
+
+# FOTA
+/spl                    emmc            /dev/block/mmcblk0boot0
+/spl_bk                 emmc            /dev/block/mmcblk0boot1
+/uboot                  emmc            /dev/block/by-name/uboot
+/sml                    emmc            /dev/block/by-name/sml
+/tos                    emmc            /dev/block/by-name/trustos
+/dtbo			emmc		/dev/block/by-name/dtbo								flags=backup=1;display="Dtbo"
+/ltedsp                 emmc            /dev/block/by-name/l_ldsp
+/ltegdsp                emmc            /dev/block/by-name/l_gdsp
+/lteagdsp               emmc            /dev/block/by-name/l_agdsp
+/ltecdsp                emmc            /dev/block/by-name/l_cdsp
+/ltemodem               emmc            /dev/block/by-name/l_modem
+/ltefixnv1              emmc            /dev/block/by-name/l_fixnv1
+/ltefixnv2              emmc            /dev/block/by-name/l_fixnv2
+/ltedeltanv             emmc            /dev/block/by-name/l_deltanv
+/wcnmodem               emmc            /dev/block/by-name/wcnmodem
+/gnssmodem              emmc            /dev/block/by-name/gnssmodem
+/pmsys                  emmc            /dev/block/by-name/pm_sys
+
+# Auto-generated code by FOTA Portal
+/optics			ext4	/dev/block/by-name/optics							flags=backup=1;display="Optics"
+/optics_image	        emmc	/dev/block/by-name/optics							flags=backup=1;display="Optics Image";flashimg=1
+/prism			ext4	/dev/block/by-name/prism							flags=backup=1;display="Prism"
+/deltanv	        emmc	/dev/block/by-name/l_deltanv
+/nvitem	                emmc	/dev/block/by-name/l_fixnv2
+/gpsbd	                emmc	/dev/block/by-name/gpsbd
+/gpsgl	                emmc	/dev/block/by-name/gpsgl
+
+# Physical partitions - Data
+/metadata		ext4	/dev/block/by-name/metadata		               				flags=wipeingui;display="Metadata"
+/cache			ext4	/dev/block/by-name/cache							flags=wipeingui;display="Cache"
+/data			f2fs	/dev/block/by-name/userdata							flags=length=-32768
+
+# Physical partitions - Important Data - Must Backup
+/efs			ext4		/dev/block/by-name/sec_efs							flags=backup=1;display="Encrypting File System (EFS)"
+/sec_efs		ext4		/dev/block/by-name/sec_efs							flags=backup=1;subpartitionof=/efs
+/persist                emmc            /dev/block/by-name/persist                                                	flags=backup=1;display="Persistent";subpartitionof=/nvram
+
+# Physical partitions - Backupable
+/boot			emmc		/dev/block/by-name/boot								flags=backup=1;display="Boot Image";flashimg=1
+/recovery		emmc		/dev/block/by-name/recovery							flags=backup=1;display="Recovery Image";flashimg=1
+/prism_image	        emmc		/dev/block/by-name/prism							flags=backup=1;display="Prism Image";flashimg=1
+/misc			emmc		/dev/block/by-name/misc								flags=backup=1;display="Misc"
+/vbmeta                 emmc            /dev/block/by-name/vbmeta                                                       flags=backup=1;display="Vbmeta"
+/vbmeta_system          emmc            /dev/block/by-name/vbmeta_system                                                flags=backup=1;display="Vbmeta System"
+/vbmeta_vendor          emmc            /dev/block/by-name/vbmeta_vendor                                                flags=backup=1;display="Vbmeta Vendor"
+/logo                   emmc            /dev/block/by-name/logo
+/fbootlogo              emmc            /dev/block/by-name/fbootlogo
+/socko                  ext4            /dev/block/by-name/socko
+/odmko                  ext4            /dev/block/by-name/odmko
+/mnt/vendor             ext4            /dev/block/by-name/prodnv
+
+# External storage
+/external_sd	        vfat		/dev/block/mmcblk1p1	        /dev/block/mmcblk1			        flags=display="Micro SD Card";storage;wipeingui;removable
+/usb_otg		auto		/dev/block/sda1 		/dev/block/sda				        flags=display="USB OTG";storage;wipeingui;removable
