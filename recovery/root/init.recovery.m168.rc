@@ -153,10 +153,10 @@ on init
     mkdir /config/usb_gadget/g1/functions/gser.gs5 0770 shell shell
     mkdir /config/usb_gadget/g1/functions/gser.gs6 0770 shell shell
     mkdir /config/usb_gadget/g1/functions/gser.gs7 0770 shell shell
-    # Prodnv mounting for touchscreen drivers
-    mount ext4 /dev/block/by-name/prodnv /mnt/vendor
+    # Socko mounting for touchscreen drivers
+    mount ext4 /dev/block/mmcblk0p43 /socko
     # Touchscreen fix
-    insmod /mnt/vendor/socko/nt36xxx_ss.ko
+    insmod /socko/nt36xxx_ss.ko
 
 on boot
     setprop sys.usb.configfs 1
