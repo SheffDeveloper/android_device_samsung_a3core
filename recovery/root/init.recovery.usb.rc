@@ -18,7 +18,7 @@ on init
     write /config/usb_gadget/g1/os_desc/use 1
     write /config/usb_gadget/g1/strings/0x409/serialnumber ${ro.serialno}
     write /config/usb_gadget/g1/strings/0x409/manufacturer "Samsung"
-    write /config/usb_gadget/g1/strings/0x409/product "Samsung Galaxy A31"
+    write /config/usb_gadget/g1/strings/0x409/product "Samsung Galaxy A03 Core"
     mkdir /config/usb_gadget/g1/functions/mass_storage.0
     mkdir /config/usb_gadget/g1/functions/ffs.adb
     mkdir /config/usb_gadget/g1/functions/ffs.fastboot
