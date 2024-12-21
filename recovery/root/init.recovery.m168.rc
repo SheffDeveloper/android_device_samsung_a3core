@@ -154,6 +154,10 @@ on init
     mkdir /config/usb_gadget/g1/functions/gser.gs6 0770 shell shell
     mkdir /config/usb_gadget/g1/functions/gser.gs7 0770 shell shell
 
+    # Socko mounting for touchscreen drivers
+    mount ext4 /dev/block/mmcblk0p1 /mnt/vendor
+    mount ext4 /dev/block/mmcblk0p43 /mnt/vendor/socko
+
 on boot
     setprop sys.usb.configfs 1
     write /sys/block/mmcblk0boot0/force_ro 0
@@ -191,18 +195,6 @@ on boot
     chmod 660 /sys/class/power_supply/battery/charger.0/jeita_control
     chmod 660 /sys/class/power_supply/battery/input_current_limit
     chmod 660 /sys/class/power_supply/battery/constant_charge_current
-
-    # Socko mounting for touchscreen drivers
-    mount ext4 /dev/block/mmcblk0p1 /mnt/vendor
-    mount ext4 /dev/block/mmcblk0p43 /mnt/vendor/socko
-    # Touchscreen fix
-    insmod /mnt/vendor/socko/nt36xxx_ss.ko
-    insmod /mnt/vendor/socko/focaltech_ts.ko
-    insmod /mnt/vendor/socko/gcore_ss.ko
-    insmod /mnt/vendor/socko/chipone-tddi_ss.ko
-    insmod /mnt/vendor/socko/ilitek-tddi.ko
-    insmod /mnt/vendor/socko/gcore_7202h.ko
-    insmod /mnt/vendor/socko/chipone-tddi.ko
 
 on fs
     #mkdir /data/misc/bluedroid 0770 bluetooth net_bt_stack
