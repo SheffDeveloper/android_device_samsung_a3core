@@ -134,11 +134,11 @@ TW_Y_OFFSET := 80
 TW_H_OFFSET := -80
 
 # Touch fix
+TW_LOAD_VENDOR_MODULES := $(shell echo \"$(shell ls $(DEVICE_PATH)/vendor/lib)\")
 TW_LOAD_VENDOR_MODULES := "chipone-tddi.ko chipone-tddi_ss.ko focaltech_ts.ko ilitek-tddi.ko gcore_ss.ko gcore_7202h.ko nt36xxx_ss.ko tcs3430.ko"
 TW_LOAD_VENDOR_BOOT_MODULES := true
 TW_LOAD_VENDOR_MODULES_EXCLUDE_GKI := true
-# PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/samsung/a3core/recovery/root,recovery/root) 
-# ^ probably not needed
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,device/samsung/a3core/recovery/root,recovery/root)
 
 # TWRP Settings
 TW_NO_REBOOT_BOOTLOADER := true
