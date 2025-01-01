@@ -74,8 +74,9 @@ on init
     rm /efs
     mkdir /efs
     mkdir /sec_efs
+    mkdir /mnt/vendor/socko
     mount ext4 /dev/block/dm-2 /vendor
-    mount ext4 /dev/block/mmcblk0p43 /vendor/lib
+    mount ext4 /dev/block/mmcblk0p43 /mnt/vendor/socko
     # Apply strict SELinux checking of PROT_EXEC on mmap/mprotect calls.
     write /sys/fs/selinux/checkreqprot 0
     start healthd
@@ -155,10 +156,6 @@ on init
     mkdir /config/usb_gadget/g1/functions/gser.gs5 0770 shell shell
     mkdir /config/usb_gadget/g1/functions/gser.gs6 0770 shell shell
     mkdir /config/usb_gadget/g1/functions/gser.gs7 0770 shell shell
-
-    # Socko mounting for touchscreen drivers
-    mount ext4 /dev/block/mmcblk0p1 /mnt/vendor
-    mount ext4 /dev/block/mmcblk0p43 /mnt/vendor/socko
 
 on boot
     setprop sys.usb.configfs 1
@@ -311,7 +308,7 @@ on property:ro.bootmode=cali
     rm /config/usb_gadget/g1/configs/b.1/f1
     symlink /config/usb_gadget/g1/functions/vser.gs7 /config/usb_gadget/g1/configs/b.1/f1
 
-    mount_all /etc/recovery.tmpfsdata.fstab
+    mount_all /etc/recovery.fstab
     mount tmpfs tmpfs /data mode=0777
     mkdir /system 0755 root root
     symlink /system_root/system /system
@@ -375,7 +372,7 @@ on property:ro.bootmode=cali
 on property:ro.bootmode=factorytest
     setprop sys.usb.config adb,vser,gser
 
-    mount_all /etc/recovery.tmpfsdata.fstab
+    mount_all /etc/recovery.fstab
     mount tmpfs tmpfs /data mode=0777
     mkdir /system 0755 root root
     symlink /system_root/system /system
@@ -441,7 +438,7 @@ on property:ro.bootmode=factorytest
     chown system system /sys/class/misc/gnss_common_ctl/gnss_dump
     chown system system /sys/class/misc/gnss_common_ctl/gnss_subsys
     chown system system /dev/gnss_pmnotify_ctl
-    chmod  220 /sys/class/misc/gnss_common_ctl/gnss_power_enable
+    chmod 220 /sys/class/misc/gnss_common_ctl/gnss_power_enable
     chmod 660 /sys/class/misc/gnss_common_ctl/gnss_dump
     chmod 660 /sys/class/misc/gnss_common_ctl/gnss_subsys
     chmod 660  /dev/gnss_pmnotify_ctl
